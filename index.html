@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Booking System</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.movies{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.card h3{
+margin:10px 0;
+}
+
+.card button{
+width:100%;
+padding:10px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.card button:hover{
+background:#2563eb;
+}
+
+.booking{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+}
+
+.seats{
+display:grid;
+grid-template-columns:repeat(5,60px);
+gap:10px;
+justify-content:center;
+margin:20px 0;
+}
+
+.seat{
+width:60px;
+height:60px;
+background:#475569;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+border-radius:8px;
+}
+
+.selected{
+background:#22c55e;
+}
+
+.booked{
+background:#ef4444;
+pointer-events:none;
+}
+
+#bookBtn{
+padding:12px 25px;
+background:#22c55e;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+font-size:16px;
+}
+
+#bookBtn:hover{
+background:#16a34a;
+}
+
+#message{
+margin-top:15px;
+font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🎬 Movie Booking System</h1>
+
+<div class="movies" id="movieContainer"></div>
+
+<div class="booking">
+<h2 id="selectedMovie">Select a Movie</h2>
+
+<div class="seats" id="seatContainer"></div>
+
+<h3>Total Cost: ₹<span id="total">0</span></h3>
+
+<br>
+
+<button id="bookBtn">Book Ticket</button>
+
+<p id="message"></p>
+
+</div>
+
+<script src="movie.js"></script>
+
+</body>
+</html>

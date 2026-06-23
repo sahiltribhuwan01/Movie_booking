@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h1{
+            color:#333;
+            margin-bottom:25px;
+        }
+
+        .buttons{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:12px;
+            margin-bottom:25px;
+        }
+
+        button{
+            background:#667eea;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#4c63d2;
+            transform:translateY(-3px);
+        }
+
+        #output{
+            text-align:left;
+            background:#f4f4f4;
+            padding:20px;
+            border-radius:10px;
+            min-height:220px;
+            overflow:auto;
+            font-size:15px;
+            white-space:pre-wrap;
+            border-left:5px solid #667eea;
+        }
+        .search-group{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin:0 8px;
+        }
+        .search-input{
+            padding:8px 10px;
+            border-radius:8px;
+            border:1px solid #ddd;
+            width:120px;
+            font-size:14px;
+        }
+        .search-btn{
+            background:#ff7a59;
+            color:white;
+            border:none;
+            padding:8px 12px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:14px;
+        }
+        .search-btn:hover{background:#ff5c38}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎓 Student Management System</h1>
+
+    <div class="buttons">
+        <button onclick="showForEach()">forEach()</button>
+        <button onclick="showMap()">map()</button>
+        <button onclick="showFilter()">filter()</button>
+        <div class="search-group">
+            <input id="searchId" class="search-input" type="number" placeholder="ID (e.g., 1 or 4)" onkeypress="if(event.key==='Enter'){showFind()}">
+            <button class="search-btn" onclick="showFind()">Find</button>
+        </div>
+        <button onclick="showReduce()">reduce()</button>
+        <button onclick="showSome()">some()</button>
+        <button onclick="showEvery()">every()</button>
+    </div>
+
+    <pre id="output">Click any button to see the result...</pre>
+</div>
+
+<script>
+const students = [
+    { id: 1, name: "Sahil", marks: 85 },
+    { id: 2, name: "Rahul", marks: 45 },
+    { id: 3, name: "Priya", marks: 92 },
+    { id: 4, name: "Amit", marks: 35 },
+    { id: 5, name: "Sneha", marks: 78 }
+];
+
+function showForEach() {
+    let result = "Student List:\n\n";
+    students.forEach(student => {
+        result += `${student.name} - ${student.marks}\n`;
+    });
+    document.getElementById("output").textContent = result;
+}
+
+function showMap() {
+    const names = students.map(student => student.name);
+    document.getElementById("output").textContent =
+        "Student Names:\n\n" + names.join(", ");
+}
+
+function showFilter() {
+    const passed = students.filter(student => student.marks >= 40);
+    document.getElementById("output").textContent =
+        "Passed Students:\n\n" + JSON.stringify(passed, null, 2);
+}
+
+function showFind() {
+    const input = document.getElementById("searchId").value.trim();
+    if (!input) {
+        document.getElementById("output").textContent = "Please enter a student ID to search.";
+        return;
+    }
+    const id = parseInt(input, 10);
+    if (Number.isNaN(id)) {
+        document.getElementById("output").textContent = "Please enter a valid numeric ID.";
+        return;
+    }
+    const student = students.find(student => student.id === id);
+    document.getElementById("output").textContent =
+        "Found Student:\n\n" + JSON.stringify(student || "No student found with that ID.", null, 2);
+}
+
+function showReduce() {
+    const total = students.reduce((sum, student) => sum + student.marks, 0);
+    document.getElementById("output").textContent =
+        "Total Marks = " + total;
+}
+
+function showSome() {
+    const failed = students.some(student => student.marks < 40);
+    document.getElementById("output").textContent =
+        "Any Student Failed? " + failed;
+}
+
+function showEvery() {
+    const allPassed = students.every(student => student.marks >= 40);
+    document.getElementById("output").textContent =
+        "All Students Passed? " + allPassed;
+}
+</script>
+
+</body>
+</html>
